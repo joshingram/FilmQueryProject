@@ -1,4 +1,4 @@
-<H1>FilmQueryProject</H1>
+<H1>Film Query Project</H1>
 <hr>
 <h3>Description:</h3>
 <hr>
@@ -16,3 +16,14 @@ When viewing film details, the user will see a list of all the film's categories
 
 Goal 3
 When viewing film details, the user will see a list of all copies of the film in inventory, with their condition.
+<h3>Lessons Learned:</h3>
+<hr>
+
+<h4>Technologies Used:</h4>
+Java, Eclipse, git/gitHub, mySQL, Zoom
+
+<h4>Java Tools Used:</h4>
+DatabaseAccessor, prepared statements, Connection, drivers, result sets, getters/setters, exceptions, try/catch, for/for each/while loops, @Overrides, array lists, Scanner, invoking methods, passing arguments to methods, implementing interfaces, constructors, imports, switch, iterator,
+
+<h4>SQL Tools Used:</h4>
+SELECT, FROM, JOIN/ON, WHERE,
