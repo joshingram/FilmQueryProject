@@ -1,15 +1,8 @@
 package com.skilldistillery.filmquery.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.skilldistillery.filmquery.entities.Actor;
-import com.skilldistillery.filmquery.entities.Film;
+import java.sql.*;
+import java.util.*;
+import com.skilldistillery.filmquery.entities.*;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
@@ -159,6 +152,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return films;
 	}
+	
 	@Override
 	public String getLanguage(int langID) throws SQLException {
 		String plainLanguage = null;
@@ -203,5 +197,35 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		stmt.close();
 		conn.close();
 		return cat;
+	}
+	
+	@Override
+	public List<Inventory> getInventory(int filmId) {
+		List<Inventory> inventories = new ArrayList<>();
+		try {
+			String user = "student";
+			String pass = "student";
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT id, film_id, store_id, media_condition FROM inventory_item WHERE film_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Inventory inventory = new Inventory();
+				inventory.setId(rs.getInt("id"));
+				inventory.setFilmId(rs.getInt("film_id"));
+				inventory.setStoreId(rs.getInt("store_id"));
+				inventory.setMediaCondition(rs.getString("media_condition"));
+				
+				inventories.add(inventory);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return inventories;
 	}
 }

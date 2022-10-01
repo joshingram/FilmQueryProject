@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
+import com.skilldistillery.filmquery.entities.Inventory;
 
 public interface DatabaseAccessor {
 	public Film findFilmById(int filmId) throws SQLException;
@@ -18,5 +19,7 @@ public interface DatabaseAccessor {
 	public String getLanguage(int langID) throws SQLException;
 
 	public String getCategory(int category) throws SQLException;
+
+	public List<Inventory> getInventory(int filmId);
 
 }

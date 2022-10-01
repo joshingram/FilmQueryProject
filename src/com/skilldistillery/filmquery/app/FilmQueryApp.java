@@ -38,15 +38,15 @@ public class FilmQueryApp {
 					lookFilmByKeyword();
 					break;
 				case 3:
-					System.out.println("good bye");
+					System.out.println("--== GOOD BYE ==--");
 					System.exit(0);
 				default:
-					System.out.println("invalid number, try again");
+					System.out.println("Invalid number, try again");
 					kb.nextLine();
 
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Invalid input, try again");
+				System.out.println("Invalid entry, try again");
 
 			}
 		}
@@ -110,10 +110,10 @@ public class FilmQueryApp {
 				System.out.println(film.toStringLong());
 				break;
 			default:
-				System.out.println("Invalid choice");
+				System.out.println("Invalid number choice");
 			}
 		} catch (InputMismatchException e) {
-			System.out.println("Invalid choice");
+			System.out.println("Invalid entry");
 		}
 	}
 
@@ -138,7 +138,7 @@ public class FilmQueryApp {
 				System.out.println("Invalid number choice");
 			}
 		} catch (InputMismatchException e) {
-			System.out.println("Invalid choice");
+			System.out.println("Invalid entry");
 		}
 	}
 }

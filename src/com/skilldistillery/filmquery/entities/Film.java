@@ -3,6 +3,8 @@ package com.skilldistillery.filmquery.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+
 public class Film {
 	
 	private int id;
@@ -139,6 +141,7 @@ public class Film {
 	}
 	
 	public String toStringLong() {
+		showInventory(id);
 		return "Film [id=" + id + ", category=" + category + ", title=" + title + ", description=" + description + ", year=" + year
 				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
 				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
@@ -146,6 +149,14 @@ public class Film {
 				+ "]";
 	}
 
+	public void showInventory(int id) {
+		DatabaseAccessorObject dao = new DatabaseAccessorObject();
+		List<Inventory> inventory = dao.getInventory(id);
+		for (Inventory inventory2 : inventory) {
+			System.out.println(inventory2);
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, languageId, length, rating, rentalDuration, rentalRate, replacementCost,
