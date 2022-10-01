@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.skilldistillery.filmquery.entities.Actor;
@@ -51,13 +52,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setReplacementCost(filmResult.getDouble("length"));
 			film.setRating(filmResult.getString("rating"));
 			film.setSpecialFeatures(filmResult.getString("special_features"));
+			String plainLanguage = getLanguage(filmResult.getInt("language_id"));
+			film.setPlainLanguage(plainLanguage);
 		}
 		stmt.close();
 		conn.close();
 		return film;
 	}
-
-
 
 	@Override
 	public Actor findActorById(int actorId) throws SQLException {
@@ -88,28 +89,92 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	@Override
 	public List<Actor> findActorsByFilmId(int filmId) {
-		Actor actor = null;
+		List<Actor> actors = new ArrayList<>();
+		try {
+			String user = "student";
+			String pass = "student";
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON actor.id = film_actor.actor_id JOIN film ON film.id = film_actor.film_id  WHERE film.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Actor actor = new Actor();
+				actor.setId(rs.getInt("id"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+				
+				actors.add(actor);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return actors;
+	}
+	
 
+	@Override
+	public List<Film> findFilmByKeyword(String keyword) {
+		List<Film> films = new ArrayList<>();
+		//films = null;
+		try {
+			String user = "student";
+			String pass = "student";
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, "%" + keyword + "%");
+			stmt.setString(2, "%" + keyword + "%");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Film film = new Film();
+				film.setId(rs.getInt("id"));
+				film.setTitle(rs.getString("title"));
+				film.setDescription(rs.getString("description"));
+				film.setYear(rs.getString("release_year"));
+				film.setLanguageId(rs.getInt("language_id"));
+				film.setRentalDuration(rs.getInt("rental_duration"));
+				film.setRentalRate(rs.getDouble("rental_rate"));
+				film.setLength(rs.getInt("length"));
+				film.setReplacementCost(rs.getDouble("length"));
+				film.setRating(rs.getString("rating"));
+				film.setSpecialFeatures(rs.getString("special_features"));
+				String plainLanguage = getLanguage(rs.getInt("language_id"));
+				film.setPlainLanguage(plainLanguage);
+				films.add(film);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return films;
+	}
+	@Override
+	public String getLanguage(int langID) throws SQLException {
+		String plainLanguage = null;
+		
 		String user = "student";
 		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 		// ...proof is left to reader
 
-		String sql = "SELECT * FROM actor WHERE id = ?";
+		String sql = "SELECT name FROM language WHERE id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, actorId);
+		stmt.setInt(1, langID);
 
-		ResultSet actorResult = stmt.executeQuery();
+		ResultSet langResult = stmt.executeQuery();
 
-		if (actorResult.next()) {
-			actor = new Actor(); // Create the object
-			// Here is our mapping of query columns to our object fields:
-			actor.setId(actorResult.getInt("id"));
-			actor.setFirstName(actorResult.getString("first_name"));
-			actor.setLastName(actorResult.getString("last_name"));
+		if (langResult.next()) {
+			plainLanguage = (langResult.getString("name"));
+			
 		}
 		stmt.close();
 		conn.close();
-		return actor;
+		return plainLanguage;
 	}
 }

@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Film {
@@ -15,13 +16,15 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private List <Actor> actors;
+	private String plainLanguage;
 	
 	public Film() {
-		
 	}
 	
 	public Film(int id, String title, String description, String year, int languageId, int rentalDuration,
-			double rentalRate, int length, double replacementCost, String rating, String specialFeatures) {
+			double rentalRate, int length, double replacementCost, String rating, String specialFeatures,
+			List<Actor> actors, String plainLanguage) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -34,7 +37,10 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
+		this.actors = actors;
+		this.plainLanguage = plainLanguage;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -101,12 +107,25 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+	
+	public List<Actor> getActors() {
+		return actors;
+	}
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+	
+	public String getPlainLanguage() {
+		return plainLanguage;
+	}
+
+	public void setPlainLanguage(String plainLanguage) {
+		this.plainLanguage = plainLanguage;
+	}
+
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", year=" + year
-				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
-				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeatures=" + specialFeatures + "]";
+		return title + ", " + year + ", " + rating + ", " + description + " " + plainLanguage;
 	}
 	@Override
 	public int hashCode() {
