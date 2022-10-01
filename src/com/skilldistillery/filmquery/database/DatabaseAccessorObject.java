@@ -6,7 +6,8 @@ import com.skilldistillery.filmquery.entities.*;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
-
+	private String user = "student";
+	private String pass = "student";
 	public DatabaseAccessorObject() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -18,9 +19,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public Film findFilmById(int filmId) throws SQLException {
 		Film film = null;
-
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 		// ...proof is left to reader
 
@@ -59,9 +57,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public Actor findActorById(int actorId) throws SQLException {
 		Actor actor = null;
-
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 		// ...proof is left to reader
 
@@ -87,8 +82,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public List<Actor> findActorsByFilmId(int filmId) {
 		List<Actor> actors = new ArrayList<>();
 		try {
-			String user = "student";
-			String pass = "student";
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON actor.id = film_actor.actor_id JOIN film ON film.id = film_actor.film_id  WHERE film.id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -115,8 +108,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public List<Film> findFilmByKeyword(String keyword) {
 		List<Film> films = new ArrayList<>();
 		try {
-			String user = "student";
-			String pass = "student";
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -156,9 +147,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public String getLanguage(int langID) throws SQLException {
 		String plainLanguage = null;
-		
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String sql = "SELECT name FROM language WHERE id = ?";
@@ -179,9 +167,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public String getCategory(int category) throws SQLException {
 		String cat = null;
-		
-		String user = "student";
-		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		String sql = "SELECT category.name FROM category JOIN film_category ON category.id = film_category.category_id JOIN film ON film.id = film_category.film_id WHERE film.id = ?";
@@ -203,8 +188,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public List<Inventory> getInventory(int filmId) {
 		List<Inventory> inventories = new ArrayList<>();
 		try {
-			String user = "student";
-			String pass = "student";
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT id, film_id, store_id, media_condition FROM inventory_item WHERE film_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);

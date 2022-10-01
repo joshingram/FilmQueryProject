@@ -61,10 +61,10 @@ public class FilmQueryApp {
 
 		if (film != null) {
 			System.out.println("Result: " + film);
-			System.out.println("Starring:");
+			System.out.println("\tStarring:");
 
 			for (Actor castMember : film.getActors()) {
-				System.out.println("\t" + castMember);
+				System.out.println("\t\t" + castMember);
 			}
 			returnOrView(film);
 		} else {
@@ -82,10 +82,10 @@ public class FilmQueryApp {
 		if (films.size() > 0) {
 			for (Film film : films) {
 				System.out.println("Result: " + film);
-				System.out.println("Starring:");
+				System.out.println("\tStarring:");
 
 				for (Actor castMember : film.getActors()) {
-					System.out.println("\t" + castMember);
+					System.out.println("\t\t" + castMember);
 				}
 			}
 			returnOrView(films);
@@ -109,9 +109,9 @@ public class FilmQueryApp {
 			case 2:
 				System.out.println(film.toStringLong());
 				DatabaseAccessorObject dao = new DatabaseAccessorObject();
-				List<Inventory> inventory = dao.getInventory(film.getId());
-				for (Inventory inventory2 : inventory) {
-					System.out.println(inventory2);
+				List<Inventory> inventories = dao.getInventory(film.getId());
+				for (Inventory inventory : inventories) {
+					System.out.println(inventory);
 				}
 				break;
 			default:
@@ -138,9 +138,9 @@ public class FilmQueryApp {
 				for (Film film : films) {
 					System.out.println(film.toStringLong());
 					DatabaseAccessorObject dao = new DatabaseAccessorObject();
-					List<Inventory> inventory = dao.getInventory(film.getId());
-					for (Inventory inventory2 : inventory) {
-						System.out.println(inventory2);
+					List<Inventory> inventories = dao.getInventory(film.getId());
+					for (Inventory inventory : inventories) {
+						System.out.println(inventory);
 					}
 				}
 				break;

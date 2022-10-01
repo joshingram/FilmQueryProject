@@ -1,6 +1,5 @@
 package com.skilldistillery.filmquery.entities;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Actor {
@@ -8,9 +7,7 @@ public class Actor {
 	private String firstName;
 	private String lastName;
 	
-	
-	public Actor() {
-		
+	public Actor() {	
 	}
 
 	public int getId() {

@@ -3,8 +3,6 @@ package com.skilldistillery.filmquery.entities;
 import java.util.List;
 import java.util.Objects;
 
-import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
-
 public class Film {
 
 	private int id;
@@ -159,15 +157,14 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return title + ", " + year + ", " + rating + ", " + description + " " + plainLanguage;
+		return title + ", " + year + ", " + rating + "\n\t" + description + " " + plainLanguage;
 	}
 
 	public String toStringLong() {
-		return "Film [id=" + id + ", category=" + category + ", title=" + title + ", description=" + description
-				+ ", year=" + year + ", languageId=" + languageId + ", rentalDuration=" + rentalDuration
-				+ ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost=" + replacementCost
-				+ ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", actors=" + actors
-				+ ", plainLanguage=" + plainLanguage + "]";
+		return "Film: " + id + " " + title + ", CATEGORY: " + category + ", " + description
+				+ "\n\t" + year + ", language id: " + languageId + ", rentalDuration: " + rentalDuration
+				+ ", rentalRate: " + rentalRate + ", length: " + length + ", replacementCost: " + replacementCost
+				+ ", " + rating + ", specialFeatures: " + specialFeatures + ",  " + plainLanguage + " \n\tstarring: " + actors;
 	}
 
 	@Override

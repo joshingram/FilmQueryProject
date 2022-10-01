@@ -9,7 +9,6 @@ public class Inventory {
 	private String mediaCondition;
 
 	public Inventory() {
-
 	}
 
 	public Inventory(int id, int filmId, int storeId, String mediaCondition) {
