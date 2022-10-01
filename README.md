@@ -1,3 +1,4 @@
+<body style="background-color:lightblue">
 <H1>Film Query Project</H1>
 
 <h3>Description:</h3>
@@ -19,7 +20,7 @@ When viewing film details, the user will see a list of all copies of the film in
 
 <h3>Lessons Learned:</h3>
 <hr>
-This is my first project to include a database.  I learned about making <span style="color:blue;"selections</span> both directly from the terminal and through Java.  
+This is my first project to include a database.  I learned about making <span style="color:blue;">selections</span> both directly from the terminal and through Java.  
 
 <h4>Technologies Used:</h4>
 Java, Eclipse, git/gitHub, mySQL, Mac terminal, Zoom, Slack, and HTML for this ReadME
@@ -28,4 +29,5 @@ Java, Eclipse, git/gitHub, mySQL, Mac terminal, Zoom, Slack, and HTML for this R
 DatabaseAccessor, prepared statements, Connection, drivers, result sets, getters/setters, exceptions, try/catch, for/for each/while loops, @Overrides, array lists, Scanner, invoking methods, passing arguments to methods, implementing interfaces, constructors, imports, switch, iterator
 
 <h4>SQL Tools Used:</h4>
-<span style="color:blue;"SELECT, FROM, JOIN/ON, WHERE</span>
+<font color="blue">SELECT, FROM, JOIN/ON, WHERE</font>
+</body>
