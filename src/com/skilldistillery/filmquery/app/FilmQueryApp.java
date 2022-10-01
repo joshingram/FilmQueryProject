@@ -108,6 +108,11 @@ public class FilmQueryApp {
 				break;
 			case 2:
 				System.out.println(film.toStringLong());
+				DatabaseAccessorObject dao = new DatabaseAccessorObject();
+				List<Inventory> inventory = dao.getInventory(film.getId());
+				for (Inventory inventory2 : inventory) {
+					System.out.println(inventory2);
+				}
 				break;
 			default:
 				System.out.println("Invalid number choice");
@@ -132,6 +137,11 @@ public class FilmQueryApp {
 			case 2:
 				for (Film film : films) {
 					System.out.println(film.toStringLong());
+					DatabaseAccessorObject dao = new DatabaseAccessorObject();
+					List<Inventory> inventory = dao.getInventory(film.getId());
+					for (Inventory inventory2 : inventory) {
+						System.out.println(inventory2);
+					}
 				}
 				break;
 			default:

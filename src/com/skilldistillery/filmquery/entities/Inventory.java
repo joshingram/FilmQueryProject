@@ -22,8 +22,8 @@ public class Inventory {
 	
 	@Override
 	public String toString() {
-		return "Inventory [id=" + id + ", filmId=" + filmId + ", storeId=" + storeId + ", mediaCondition="
-				+ mediaCondition + "]";
+		return "Inventory ID#: " + id + ", at store#: " + storeId + ", condition: "
+				+ mediaCondition;
 	}
 
 	public int getId() {
