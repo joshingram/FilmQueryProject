@@ -18,13 +18,14 @@ public class Film {
 	private String specialFeatures;
 	private List <Actor> actors;
 	private String plainLanguage;
+	private String category;
 	
 	public Film() {
 	}
 	
 	public Film(int id, String title, String description, String year, int languageId, int rentalDuration,
 			double rentalRate, int length, double replacementCost, String rating, String specialFeatures,
-			List<Actor> actors, String plainLanguage) {
+			List<Actor> actors, String plainLanguage, String category) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -39,6 +40,7 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 		this.actors = actors;
 		this.plainLanguage = plainLanguage;
+		this.category = category;
 	}
 
 	public int getId() {
@@ -123,13 +125,21 @@ public class Film {
 		this.plainLanguage = plainLanguage;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
 		return title + ", " + year + ", " + rating + ", " + description + " " + plainLanguage;
 	}
 	
 	public String toStringLong() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", year=" + year
+		return "Film [id=" + id + ", category=" + category + ", title=" + title + ", description=" + description + ", year=" + year
 				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
 				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
 				+ ", specialFeatures=" + specialFeatures + ", actors=" + actors + ", plainLanguage=" + plainLanguage

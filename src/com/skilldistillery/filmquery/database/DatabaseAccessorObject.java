@@ -55,6 +55,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setPlainLanguage(plainLanguage);
 			List <Actor> actors = findActorsByFilmId(filmResult.getInt("id"));
 			film.setActors(actors);
+			String category = getCategory(filmResult.getInt("id"));
+			film.setCategory(category);
 		}
 		stmt.close();
 		conn.close();
@@ -145,6 +147,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setPlainLanguage(plainLanguage);
 				List <Actor> actors = findActorsByFilmId(rs.getInt("id"));
 				film.setActors(actors);
+				String category = getCategory(rs.getInt("id"));
+				film.setCategory(category);
 				films.add(film);
 			}
 			rs.close();
@@ -176,5 +180,28 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		stmt.close();
 		conn.close();
 		return plainLanguage;
+	}
+	
+	@Override
+	public String getCategory(int category) throws SQLException {
+		String cat = null;
+		
+		String user = "student";
+		String pass = "student";
+		Connection conn = DriverManager.getConnection(URL, user, pass);
+
+		String sql = "SELECT category.name FROM category JOIN film_category ON category.id = film_category.category_id JOIN film ON film.id = film_category.film_id WHERE film.id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, category);
+
+		ResultSet catResult = stmt.executeQuery();
+
+		if (catResult.next()) {
+			cat = (catResult.getString("name"));
+			
+		}
+		stmt.close();
+		conn.close();
+		return cat;
 	}
 }

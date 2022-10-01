@@ -1,50 +1,27 @@
 package com.skilldistillery.filmquery.app;
 
 import java.sql.SQLException;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-import com.skilldistillery.filmquery.database.DatabaseAccessor;
-import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
-import com.skilldistillery.filmquery.entities.Actor;
-import com.skilldistillery.filmquery.entities.Film;
+import com.skilldistillery.filmquery.database.*;
+import com.skilldistillery.filmquery.entities.*;
 
 public class FilmQueryApp {
-
-	DatabaseAccessor db = new DatabaseAccessorObject();
+	private Scanner kb = new Scanner(System.in);
+	private DatabaseAccessor db = new DatabaseAccessorObject();
 
 	public static void main(String[] args) throws SQLException {
 		FilmQueryApp app = new FilmQueryApp();
-//    app.test();
 		app.launch();
-	}
-
-	private void test() throws SQLException {
-		Film film = db.findFilmById(1);
-		System.out.println(film);
-	}
-
-	private void test2() throws SQLException {
-		Actor actor = db.findActorById(1);
-		System.out.println(actor);
-	}
-
-	private void test3() {
-		List<Actor> actors = db.findActorsByFilmId(1);
-		System.out.println(actors);
 	}
 
 	private void launch() throws SQLException {
 		System.out.println("Welcome to the Film Query App.");
 		startUserInterface();
-
 	}
 
 	private void startUserInterface() throws SQLException {
 		while (true) {
-			Scanner kb = new Scanner(System.in);
-
 			System.out.println();
 			System.out.println("Please choose from the following:");
 			System.out.println("1. Look up a film by ID number");
@@ -72,13 +49,10 @@ public class FilmQueryApp {
 				System.out.println("Invalid input, try again");
 
 			}
-// TODO fix this kb.close
-			// kb.close();
 		}
 	}
 
 	private void lookFilmById() throws SQLException {
-		Scanner kb = new Scanner(System.in);
 		System.out.println();
 		System.out.print("Please enter the film ID number: ");
 		int filmChoice = kb.nextInt();
@@ -92,15 +66,13 @@ public class FilmQueryApp {
 			for (Actor castMember : film.getActors()) {
 				System.out.println("\t" + castMember);
 			}
+			returnOrView(film);
 		} else {
 			System.out.println("No such film found, try again.");
-			startUserInterface();
 		}
-		returnOrView(film);
 	}
 
 	private void lookFilmByKeyword() throws SQLException {
-		Scanner kb = new Scanner(System.in);
 		System.out.println();
 		System.out.print("Please enter the keyword: ");
 		String userKeyword = kb.next();
@@ -115,14 +87,15 @@ public class FilmQueryApp {
 				for (Actor castMember : film.getActors()) {
 					System.out.println("\t" + castMember);
 				}
-			}returnOrView(films);
+			}
+			returnOrView(films);
 		} else {
 			System.out.println("No results for that search found, try again.");
 		}
 	}
 
+	// Overloaded method for a single film
 	private void returnOrView(Film film) throws SQLException {
-		Scanner kb = new Scanner(System.in);
 		System.out.println("Would you like to:");
 		System.out.println("1) Return to main menu");
 		System.out.println("2) View all film details");
@@ -143,9 +116,9 @@ public class FilmQueryApp {
 			System.out.println("Invalid choice");
 		}
 	}
-	
+
+	// Overloaded method for a list of films
 	private void returnOrView(List<Film> films) throws SQLException {
-		Scanner kb = new Scanner(System.in);
 		System.out.println("Would you like to:");
 		System.out.println("1) Return to main menu");
 		System.out.println("2) View all film details");
@@ -162,7 +135,7 @@ public class FilmQueryApp {
 				}
 				break;
 			default:
-				System.out.println("Invalid choice");
+				System.out.println("Invalid number choice");
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("Invalid choice");
