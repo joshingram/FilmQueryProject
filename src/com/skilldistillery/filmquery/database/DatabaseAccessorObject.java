@@ -54,6 +54,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setSpecialFeatures(filmResult.getString("special_features"));
 			String plainLanguage = getLanguage(filmResult.getInt("language_id"));
 			film.setPlainLanguage(plainLanguage);
+			List <Actor> actors = findActorsByFilmId(filmResult.getInt("id"));
+			film.setActors(actors);
 		}
 		stmt.close();
 		conn.close();
@@ -144,6 +146,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setSpecialFeatures(rs.getString("special_features"));
 				String plainLanguage = getLanguage(rs.getInt("language_id"));
 				film.setPlainLanguage(plainLanguage);
+				List <Actor> actors = findActorsByFilmId(rs.getInt("id"));
+				film.setActors(actors);
 				films.add(film);
 			}
 			rs.close();
