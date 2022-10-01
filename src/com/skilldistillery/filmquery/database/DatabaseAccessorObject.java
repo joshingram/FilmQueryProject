@@ -18,8 +18,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Driver not found, contact tech support");
 		}
 	}
 
@@ -105,7 +104,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				actor.setId(rs.getInt("id"));
 				actor.setFirstName(rs.getString("first_name"));
 				actor.setLastName(rs.getString("last_name"));
-				
 				actors.add(actor);
 			}
 			rs.close();
@@ -121,7 +119,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public List<Film> findFilmByKeyword(String keyword) {
 		List<Film> films = new ArrayList<>();
-		//films = null;
 		try {
 			String user = "student";
 			String pass = "student";
@@ -165,7 +162,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String user = "student";
 		String pass = "student";
 		Connection conn = DriverManager.getConnection(URL, user, pass);
-		// ...proof is left to reader
 
 		String sql = "SELECT name FROM language WHERE id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);

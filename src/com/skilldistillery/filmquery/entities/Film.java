@@ -127,6 +127,15 @@ public class Film {
 	public String toString() {
 		return title + ", " + year + ", " + rating + ", " + description + " " + plainLanguage;
 	}
+	
+	public String toStringLong() {
+		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", year=" + year
+				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
+				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
+				+ ", specialFeatures=" + specialFeatures + ", actors=" + actors + ", plainLanguage=" + plainLanguage
+				+ "]";
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, languageId, length, rating, rentalDuration, rentalRate, replacementCost,

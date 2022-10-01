@@ -94,10 +94,12 @@ public class FilmQueryApp {
 			}
 		} else {
 			System.out.println("No such film found, try again.");
+			startUserInterface();
 		}
+		returnOrView(film);
 	}
 
-	private void lookFilmByKeyword() {
+	private void lookFilmByKeyword() throws SQLException {
 		Scanner kb = new Scanner(System.in);
 		System.out.println();
 		System.out.print("Please enter the keyword: ");
@@ -113,9 +115,57 @@ public class FilmQueryApp {
 				for (Actor castMember : film.getActors()) {
 					System.out.println("\t" + castMember);
 				}
-			}
+			}returnOrView(films);
 		} else {
-			System.out.println("No such film found, try again.");
+			System.out.println("No results for that search found, try again.");
+		}
+	}
+
+	private void returnOrView(Film film) throws SQLException {
+		Scanner kb = new Scanner(System.in);
+		System.out.println("Would you like to:");
+		System.out.println("1) Return to main menu");
+		System.out.println("2) View all film details");
+		try {
+			int userChoice = kb.nextInt();
+
+			switch (userChoice) {
+			case 1:
+				startUserInterface();
+				break;
+			case 2:
+				System.out.println(film.toStringLong());
+				break;
+			default:
+				System.out.println("Invalid choice");
+			}
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid choice");
+		}
+	}
+	
+	private void returnOrView(List<Film> films) throws SQLException {
+		Scanner kb = new Scanner(System.in);
+		System.out.println("Would you like to:");
+		System.out.println("1) Return to main menu");
+		System.out.println("2) View all film details");
+		try {
+			int userChoice = kb.nextInt();
+
+			switch (userChoice) {
+			case 1:
+				startUserInterface();
+				break;
+			case 2:
+				for (Film film : films) {
+					System.out.println(film.toStringLong());
+				}
+				break;
+			default:
+				System.out.println("Invalid choice");
+			}
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid choice");
 		}
 	}
 }
