@@ -157,7 +157,7 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return title + ", " + year + ", " + rating + "\n\t" + description + " " + plainLanguage;
+		return title + ", " + year + ", " + rating + ", " + plainLanguage + "\n\t" + description;
 	}
 
 	public String toStringLong() {
